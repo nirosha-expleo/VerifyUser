@@ -35,10 +35,23 @@ fi
 echo ""
 echo "📦 Step 2: Preparing gh-pages branch..."
 
+# Commit any uncommitted changes on main branch first
+echo "   Checking for uncommitted changes..."
+if ! git diff-index --quiet HEAD --; then
+    echo "   Found uncommitted changes, committing them..."
+    git add .
+    git commit -m "Save changes before deployment" || true
+fi
+
 # Check if gh-pages branch exists locally
 if git show-ref --verify --quiet refs/heads/gh-pages; then
     echo "   gh-pages branch exists locally, switching to it..."
-    git checkout gh-pages
+    # Force checkout to overwrite any conflicting files
+    git checkout -f gh-pages 2>/dev/null || {
+        echo "   Force cleaning and switching..."
+        git clean -fd
+        git checkout -f gh-pages
+    }
     # Remove all files except .git
     git rm -rf . 2>/dev/null || true
 else
