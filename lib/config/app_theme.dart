@@ -25,13 +25,6 @@ class AppTheme {
           color: AppColors.whiteAppColor,
         ),
       ),
-      cardTheme: CardThemeData(
-        color: AppColors.whiteAppColor,
-        elevation: 2,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
-        ),
-      ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           backgroundColor: AppColors.appButtonColor,
