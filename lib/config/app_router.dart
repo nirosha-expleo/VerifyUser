@@ -20,6 +20,11 @@ class AppRouter {
   static final GoRouter router = GoRouter(
     initialLocation: '/apply-now',
     routes: [
+      // Root route - redirects to apply-now
+      GoRoute(
+        path: '/',
+        redirect: (context, state) => '/apply-now',
+      ),
       // Main Application Flow
       GoRoute(
         path: '/apply-now',
