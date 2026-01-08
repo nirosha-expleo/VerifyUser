@@ -22,7 +22,21 @@ fi
 echo "✅ Build completed successfully!"
 echo ""
 
-# Step 2: Check if we're on main branch
+# Verify build folder exists
+if [ ! -d "build/web" ]; then
+    echo "❌ Error: build/web directory not found!"
+    echo "   The build must have failed. Please check the build output above."
+    exit 1
+fi
+
+# Step 2: Save build files to temporary location (before switching branches)
+echo ""
+echo "📦 Step 2: Saving build files..."
+TEMP_BUILD_DIR=$(mktemp -d)
+cp -r build/web/* "$TEMP_BUILD_DIR/"
+echo "   ✅ Build files saved to temporary location"
+
+# Step 3: Check if we're on main branch
 current_branch=$(git branch --show-current)
 echo "📍 Current branch: $current_branch"
 
@@ -31,9 +45,9 @@ if [ "$current_branch" != "main" ]; then
     git checkout main
 fi
 
-# Step 3: Create gh-pages branch or update it
+# Step 4: Create gh-pages branch or update it
 echo ""
-echo "📦 Step 2: Preparing gh-pages branch..."
+echo "📦 Step 3: Preparing gh-pages branch..."
 
 # Commit any uncommitted changes on main branch first
 echo "   Checking for uncommitted changes..."
@@ -54,16 +68,34 @@ if git show-ref --verify --quiet refs/heads/gh-pages; then
     }
     # Remove all files except .git
     git rm -rf . 2>/dev/null || true
+    # Also remove any untracked files
+    git clean -fd
 else
     echo "   Creating new gh-pages branch..."
     git checkout --orphan gh-pages
     git rm -rf . 2>/dev/null || true
+    git clean -fd
 fi
 
-# Step 4: Copy build files
+# Step 5: Copy build files from temporary location
 echo ""
-echo "📋 Step 3: Copying build files..."
-cp -r build/web/* .
+echo "📋 Step 4: Copying build files to gh-pages branch..."
+
+# Copy all files from temporary location
+cp -r "$TEMP_BUILD_DIR"/* .
+
+# Clean up temporary directory
+rm -rf "$TEMP_BUILD_DIR"
+
+# Verify index.html exists
+if [ ! -f "index.html" ]; then
+    echo "❌ Error: index.html not found after copying!"
+    echo "   Something went wrong with the file copy."
+    git checkout main
+    exit 1
+fi
+
+echo "   ✅ Files copied successfully (found index.html)"
 
 # Step 5: Create .nojekyll file
 echo "📝 Step 4: Creating .nojekyll file..."
