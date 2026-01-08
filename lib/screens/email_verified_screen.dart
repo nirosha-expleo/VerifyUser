@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:verifyuser/utility/app_colors.dart';
 import 'package:verifyuser/utility/responsive_helper.dart';
+import 'package:verifyuser/utility/navigation_helper.dart';
 import 'package:intl/intl.dart';
 
 /// Screen 8: Email Verified Successfully
@@ -16,6 +17,14 @@ class EmailVerifiedScreen extends StatelessWidget {
     
     return Scaffold(
       backgroundColor: AppColors.whiteAppColor,
+      appBar: AppBar(
+        backgroundColor: AppColors.whiteAppColor,
+        elevation: 0,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: AppColors.appTitleBlack),
+          onPressed: () => NavigationHelper.smartPop(context),
+        ),
+      ),
       body: Center(
         child: ConstrainedBox(
           constraints: BoxConstraints(
@@ -48,7 +57,7 @@ class EmailVerifiedScreen extends StatelessWidget {
                       child: Text(
                         'Home',
                         style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: AppColors.hdbBlue,
+                          color: AppColors.appButtonColor,
                         ),
                       ),
                     ),
@@ -82,7 +91,7 @@ class EmailVerifiedScreen extends StatelessWidget {
                       Icon(
                         Icons.check_circle,
                         size: 120,
-                        color: AppColors.hdbSuccessGreen,
+                        color: AppColors.green,
                       ),
                       const SizedBox(height: 24),
                       Text(
@@ -104,4 +113,3 @@ class EmailVerifiedScreen extends StatelessWidget {
     );
   }
 }
-

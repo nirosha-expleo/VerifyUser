@@ -43,7 +43,7 @@ class OTPInputField extends StatelessWidget {
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8),
-                borderSide: const BorderSide(color: AppColors.hdbBlue, width: 2),
+                borderSide: const BorderSide(color: AppColors.appButtonColor, width: 2),
               ),
             ),
             inputFormatters: [

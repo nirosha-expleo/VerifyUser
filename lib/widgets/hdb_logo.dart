@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:verifyuser/utility/app_colors.dart';
 
-/// HDB Financial Services Logo Widget
-/// Displays the red square with "HDB" and blue "FINANCIAL SERVICES" text
-class HDBLogo extends StatelessWidget {
-  const HDBLogo({super.key});
+/// App Logo Widget
+/// Displays the app logo
+class AppLogo extends StatelessWidget {
+  const AppLogo({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -12,17 +12,17 @@ class HDBLogo extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        // Red square with HDB
+        // Logo square
         Container(
           width: 60,
           height: 60,
           decoration: BoxDecoration(
-            color: AppColors.hdbRed,
+            color: AppColors.appButtonColor,
             borderRadius: BorderRadius.circular(4),
           ),
           child: const Center(
             child: Text(
-              'HDB',
+              'EX',
               style: TextStyle(
                 color: AppColors.whiteAppColor,
                 fontSize: 20,
@@ -32,23 +32,14 @@ class HDBLogo extends StatelessWidget {
           ),
         ),
         const SizedBox(width: 12),
-        // FINANCIAL SERVICES text
+        // EXPLEO text
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'FINANCIAL',
+              'EXPLEO',
               style: TextStyle(
-                color: AppColors.hdbBlue,
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-                letterSpacing: 0.5,
-              ),
-            ),
-            Text(
-              'SERVICES',
-              style: TextStyle(
-                color: AppColors.hdbBlue,
+                color: AppColors.appButtonColor,
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
                 letterSpacing: 0.5,

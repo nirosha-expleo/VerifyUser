@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:verifyuser/utility/app_colors.dart';
 import 'package:verifyuser/utility/responsive_helper.dart';
+import 'package:verifyuser/utility/navigation_helper.dart';
 
 /// Screen 7: Email Verification Link Sent
 /// Features: Envelope icon, confirmation message
@@ -10,10 +11,18 @@ class EmailVerificationSentScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final email = 'rekha.ravi@expleogroup.com'; // Should come from previous screen
+    final email = 'xxxxx@xxxxx.com'; // Dummy data
     
     return Scaffold(
       backgroundColor: AppColors.whiteAppColor,
+      appBar: AppBar(
+        backgroundColor: AppColors.whiteAppColor,
+        elevation: 0,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: AppColors.appTitleBlack),
+          onPressed: () => NavigationHelper.smartPop(context),
+        ),
+      ),
       body: Center(
         child: ConstrainedBox(
           constraints: BoxConstraints(
@@ -28,7 +37,7 @@ class EmailVerificationSentScreen extends StatelessWidget {
                 Icon(
                   Icons.mail,
                   size: 120,
-                  color: AppColors.hdbBlue,
+                  color: AppColors.appButtonColor,
                 ),
                 const SizedBox(height: 32),
                 Text(
@@ -42,7 +51,7 @@ class EmailVerificationSentScreen extends StatelessWidget {
                 Text(
                   email,
                   style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                    color: AppColors.hdbBlue,
+                    color: AppColors.appButtonColor,
                     fontWeight: FontWeight.bold,
                   ),
                   textAlign: TextAlign.center,
@@ -71,4 +80,3 @@ class EmailVerificationSentScreen extends StatelessWidget {
     );
   }
 }
-

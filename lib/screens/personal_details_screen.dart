@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:verifyuser/utility/app_colors.dart';
 import 'package:verifyuser/utility/responsive_helper.dart';
+import 'package:verifyuser/utility/navigation_helper.dart';
 import 'package:verifyuser/widgets/hdb_logo.dart';
 
 /// Screen 4: Personal Details Form
@@ -13,6 +14,14 @@ class PersonalDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.whiteAppColor,
+      appBar: AppBar(
+        backgroundColor: AppColors.whiteAppColor,
+        elevation: 0,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: AppColors.appTitleBlack),
+          onPressed: () => NavigationHelper.smartPop(context),
+        ),
+      ),
       body: Center(
         child: ConstrainedBox(
           constraints: BoxConstraints(
@@ -24,7 +33,7 @@ class PersonalDetailsScreen extends StatelessWidget {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  const HDBLogo(),
+                  const AppLogo(),
                   const SizedBox(height: 32),
                   Text(
                     'Personal Details',
@@ -34,17 +43,72 @@ class PersonalDetailsScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 32),
-                  _buildTextField(context, 'Full name*', 'DHARMENDRA KUMAR CHAUDHARY'),
+                  _buildTextField(context, 'Full name*', 'XXXXX XXXXX'),
                   const SizedBox(height: 16),
-                  _buildTextField(context, 'PAN number', 'AJEPC3578N'),
+                  _buildTextField(context, 'PAN number', 'XXXXX1234X'),
                   const SizedBox(height: 16),
-                  _buildTextField(context, 'Date of Birth', '01/07/1982'),
+                  _buildTextField(context, 'Date of Birth', 'XX/XX/XXXX'),
                   const SizedBox(height: 16),
-                  _buildTextField(context, 'Name As Per PAN*', 'hariharan'),
+                  _buildTextField(context, 'Name As Per PAN*', 'XXXXX'),
                   const SizedBox(height: 16),
-                  _buildTextField(context, 'Father Name As Per PAN*', 'Chaudhary'),
+                  _buildTextField(context, 'Father Name As Per PAN*', 'XXXXX'),
                   const SizedBox(height: 16),
-                  _buildTextField(context, 'Email ID', 'rekha.ravi@expleogroup.com'),
+                  _buildTextField(context, 'Email ID', 'xxxxx@xxxxx.com'),
+                  const SizedBox(height: 24),
+                  // DigiLocker Option
+                  Container(
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      color: AppColors.green.withOpacity(0.1),
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(color: AppColors.green, width: 1),
+                    ),
+                    child: Row(
+                      children: [
+                        Container(
+                          width: 40,
+                          height: 40,
+                          decoration: BoxDecoration(
+                            color: AppColors.green,
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: const Center(
+                            child: Text(
+                              'DL',
+                              style: TextStyle(
+                                color: AppColors.whiteAppColor,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Fetch from DigiLocker',
+                                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                              Text(
+                                'Get documents from DigiLocker',
+                                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                                  color: AppColors.appLabelColor,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: () => context.go('/verification-flow/digilocker'),
+                          child: const Text('Connect'),
+                        ),
+                      ],
+                    ),
+                  ),
                   const SizedBox(height: 32),
                   SizedBox(
                     width: double.infinity,
@@ -103,7 +167,7 @@ class PersonalDetailsScreen extends StatelessWidget {
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8),
-              borderSide: const BorderSide(color: AppColors.hdbBlue, width: 2),
+              borderSide: const BorderSide(color: AppColors.appButtonColor, width: 2),
             ),
           ),
         ),
@@ -111,4 +175,3 @@ class PersonalDetailsScreen extends StatelessWidget {
     );
   }
 }
-

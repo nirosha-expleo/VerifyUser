@@ -60,12 +60,16 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
                   child: ElevatedButton(
                     onPressed: _selectedDocument != null
                         ? () {
-                            // Handle Get Address
-                            context.go('/address-details');
+                            // Redirect to Aadhaar verification flow
+                            if (_selectedDocument == 'Aadhaar Card') {
+                              context.go('/verification-flow/aadhaar');
+                            } else {
+                              context.go('/address-details');
+                            }
                           }
                         : null,
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.hdbBlue,
+                      backgroundColor: AppColors.appButtonColor,
                       foregroundColor: AppColors.whiteAppColor,
                       padding: const EdgeInsets.symmetric(vertical: 16),
                       shape: RoundedRectangleBorder(
@@ -103,7 +107,7 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           border: Border.all(
-            color: isSelected ? AppColors.hdbBlue : AppColors.inputFieldBorder,
+            color: isSelected ? AppColors.appButtonColor : AppColors.inputFieldBorder,
             width: isSelected ? 2 : 1,
           ),
           borderRadius: BorderRadius.circular(8),
@@ -119,10 +123,10 @@ class _EditAddressScreenState extends State<EditAddressScreen> {
                   _selectedDocument = value;
                 });
               },
-              activeColor: AppColors.hdbBlue,
+              activeColor: AppColors.appButtonColor,
             ),
             const SizedBox(width: 12),
-            Icon(icon, color: AppColors.hdbBlue, size: 28),
+            Icon(icon, color: AppColors.appButtonColor, size: 28),
             const SizedBox(width: 12),
             Text(
               label,

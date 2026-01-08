@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:verifyuser/utility/app_colors.dart';
+import 'package:verifyuser/utility/navigation_helper.dart';
 
 /// Loading Screen with Countdown
 /// Features: Dark blue background, countdown timer, loading message
@@ -39,7 +41,15 @@ class _LoadingScreenState extends State<LoadingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.hdbDarkBlue,
+      backgroundColor: AppColors.appButtonColor,
+      appBar: AppBar(
+        backgroundColor: AppColors.appButtonColor,
+        elevation: 0,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: AppColors.whiteAppColor),
+          onPressed: () => NavigationHelper.smartPop(context),
+        ),
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

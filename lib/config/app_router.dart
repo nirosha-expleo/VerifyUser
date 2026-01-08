@@ -10,6 +10,12 @@ import 'package:verifyuser/screens/email_verification_sent_screen.dart';
 import 'package:verifyuser/screens/email_verified_screen.dart';
 import 'package:verifyuser/screens/loading_screen.dart';
 import 'package:verifyuser/screens/document_viewer_screen.dart';
+import 'package:verifyuser/screens/offer_screen.dart';
+import 'package:verifyuser/screens/error_screen.dart';
+import 'package:verifyuser/screens/pan_verification_screen.dart';
+import 'package:verifyuser/screens/aadhaar_verification_screen.dart';
+import 'package:verifyuser/screens/digilocker_verification_screen.dart';
+import 'package:verifyuser/screens/verification_flow_screen.dart';
 import 'package:verifyuser/screens/screen1.dart';
 import 'package:verifyuser/screens/screen2.dart';
 import 'package:verifyuser/screens/screen3.dart';
@@ -61,6 +67,48 @@ class AppRouter {
       GoRoute(
         path: '/loading',
         builder: (context, state) => const LoadingScreen(),
+      ),
+      GoRoute(
+        path: '/offer',
+        builder: (context, state) => const OfferScreen(),
+      ),
+      GoRoute(
+        path: '/error',
+        builder: (context, state) {
+          final errorMessage = state.uri.queryParameters['message'];
+          final errorTitle = state.uri.queryParameters['title'];
+          return ErrorScreen(
+            errorMessage: errorMessage,
+            errorTitle: errorTitle,
+          );
+        },
+      ),
+      GoRoute(
+        path: '/pan-verification',
+        builder: (context, state) {
+          final panNumber = state.uri.queryParameters['pan'] ?? 
+                           (state.extra as Map<String, dynamic>?)?['pan'];
+          return PanVerificationScreen(panNumber: panNumber);
+        },
+      ),
+      GoRoute(
+        path: '/aadhaar-verification',
+        builder: (context, state) => const AadhaarVerificationScreen(),
+      ),
+      GoRoute(
+        path: '/digilocker-verification',
+        builder: (context, state) => const DigiLockerVerificationScreen(),
+      ),
+      GoRoute(
+        path: '/verification-flow/:type',
+        builder: (context, state) {
+          final type = state.pathParameters['type'] ?? 'pan';
+          final panNumber = state.uri.queryParameters['pan'];
+          return VerificationFlowScreen(
+            verificationType: type,
+            panNumber: panNumber,
+          );
+        },
       ),
       // Document Viewer (for navigation/testing)
       GoRoute(

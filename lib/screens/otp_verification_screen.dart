@@ -1,7 +1,9 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:verifyuser/utility/app_colors.dart';
 import 'package:verifyuser/utility/responsive_helper.dart';
+import 'package:verifyuser/utility/navigation_helper.dart';
 import 'package:verifyuser/widgets/hdb_logo.dart';
 import 'package:verifyuser/widgets/otp_input_field.dart';
 
@@ -19,6 +21,7 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
     6,
     (index) => TextEditingController(),
   );
+  Timer? _timer;
   int _resendTimer = 30; // seconds
   bool _isLoading = false;
 
@@ -29,18 +32,20 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
   }
 
   void _startTimer() {
-    Future.delayed(const Duration(seconds: 1), () {
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       if (mounted && _resendTimer > 0) {
         setState(() {
           _resendTimer--;
         });
-        _startTimer();
+      } else {
+        timer.cancel();
       }
     });
   }
 
   @override
   void dispose() {
+    _timer?.cancel();
     for (var controller in _otpControllers) {
       controller.dispose();
     }
@@ -48,6 +53,19 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
   }
 
   void _handleVerify() {
+    // Check if all OTP fields are filled
+    final otp = _otpControllers.map((c) => c.text).join();
+    if (otp.length != 6) {
+      _showErrorDialog('Invalid OTP', 'Please enter all 6 digits of the OTP');
+      return;
+    }
+
+    // Validate OTP format (basic check)
+    if (!RegExp(r'^[0-9]{6}$').hasMatch(otp)) {
+      _showErrorDialog('Invalid OTP', 'OTP should contain only numbers');
+      return;
+    }
+
     setState(() {
       _isLoading = true;
     });
@@ -57,9 +75,32 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
         setState(() {
           _isLoading = false;
         });
+        // For demo, accept any 6-digit OTP, but in real app, validate with backend
         context.go('/pan-dob-selection');
       }
     });
+  }
+
+  void _showErrorDialog(String title, String message) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Row(
+          children: [
+            const Icon(Icons.error_outline, color: AppColors.redAccent),
+            const SizedBox(width: 8),
+            Text(title),
+          ],
+        ),
+        content: Text(message),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: const Text('OK'),
+          ),
+        ],
+      ),
+    );
   }
 
   String _formatTimer(int seconds) {
@@ -70,11 +111,18 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final isMobile = ResponsiveHelper.isMobile(context);
-    final mobileNumber = '9984384097'; // This should come from previous screen
+    final mobileNumber = '+91 XXXXX XXXXX'; // Dummy data
     
     return Scaffold(
       backgroundColor: AppColors.whiteAppColor,
+      appBar: AppBar(
+        backgroundColor: AppColors.whiteAppColor,
+        elevation: 0,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: AppColors.appTitleBlack),
+          onPressed: () => NavigationHelper.smartPop(context),
+        ),
+      ),
       body: Stack(
         children: [
           Center(
@@ -88,7 +136,7 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const HDBLogo(),
+                    const AppLogo(),
                     const SizedBox(height: 32),
                     Text(
                       'OTP Verification',
@@ -126,7 +174,7 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
                         style: TextStyle(
                           color: _resendTimer > 0
                               ? AppColors.appLabelColor
-                              : AppColors.hdbBlue,
+                              : AppColors.appButtonColor,
                           fontSize: 14,
                         ),
                       ),
@@ -192,4 +240,3 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
     );
   }
 }
-

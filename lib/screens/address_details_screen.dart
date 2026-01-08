@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:verifyuser/utility/app_colors.dart';
 import 'package:verifyuser/utility/responsive_helper.dart';
+import 'package:verifyuser/utility/navigation_helper.dart';
 import 'package:verifyuser/widgets/hdb_logo.dart';
 
 /// Screen 5: Address Details Form
@@ -34,6 +35,14 @@ class _AddressDetailsScreenState extends State<AddressDetailsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.whiteAppColor,
+      appBar: AppBar(
+        backgroundColor: AppColors.whiteAppColor,
+        elevation: 0,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: AppColors.appTitleBlack),
+          onPressed: () => NavigationHelper.smartPop(context),
+        ),
+      ),
       body: Stack(
         children: [
           Center(
@@ -47,7 +56,7 @@ class _AddressDetailsScreenState extends State<AddressDetailsScreen> {
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
-                      const HDBLogo(),
+                      const AppLogo(),
                       const SizedBox(height: 32),
                       Text(
                         'Address details',
@@ -57,26 +66,26 @@ class _AddressDetailsScreenState extends State<AddressDetailsScreen> {
                         ),
                       ),
                       const SizedBox(height: 32),
-                      _buildTextField(context, 'Address Line 1*', 'VILL ARKHAPUR'),
+                      _buildTextField(context, 'Address Line 1*', 'XXXXX'),
                       const SizedBox(height: 16),
-                      _buildTextField(context, 'Address Line 2*', 'PO CHILMA BAZAR'),
+                      _buildTextField(context, 'Address Line 2*', 'XXXXX'),
                       const SizedBox(height: 16),
-                      _buildTextField(context, 'Address Line 3', 'GAUSPUR'),
+                      _buildTextField(context, 'Address Line 3', 'XXXXX'),
                       const SizedBox(height: 16),
-                      _buildTextField(context, 'Pincode*', '272301', onChanged: _fetchPincode),
+                      _buildTextField(context, 'Pincode*', 'XXXXXX', onChanged: _fetchPincode),
                       const SizedBox(height: 16),
-                      _buildTextField(context, 'City*', 'BASTI'),
+                      _buildTextField(context, 'City*', 'XXXXX'),
                       const SizedBox(height: 16),
-                      _buildTextField(context, 'State*', 'UTTAR PRADESH'),
+                      _buildTextField(context, 'State*', 'XXXXX'),
                       const SizedBox(height: 32),
                       Row(
                         children: [
                           Expanded(
                             child: ElevatedButton(
-                              onPressed: null,
+                              onPressed: () => context.go('/edit-address'),
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: AppColors.disableAppColor,
-                                foregroundColor: AppColors.appLabelColor,
+                                backgroundColor: AppColors.appButtonColor,
+                                foregroundColor: AppColors.whiteAppColor,
                                 padding: const EdgeInsets.symmetric(vertical: 16),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(8),
@@ -90,7 +99,7 @@ class _AddressDetailsScreenState extends State<AddressDetailsScreen> {
                             child: ElevatedButton(
                               onPressed: () => context.go('/email-verification-sent'),
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: AppColors.hdbBlue,
+                                backgroundColor: AppColors.appButtonColor,
                                 foregroundColor: AppColors.whiteAppColor,
                                 padding: const EdgeInsets.symmetric(vertical: 16),
                                 shape: RoundedRectangleBorder(
@@ -122,7 +131,7 @@ class _AddressDetailsScreenState extends State<AddressDetailsScreen> {
                 child: Container(
                   padding: const EdgeInsets.all(24),
                   decoration: BoxDecoration(
-                    color: AppColors.hdbBlue,
+                    color: AppColors.appButtonColor,
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Column(
@@ -183,7 +192,7 @@ class _AddressDetailsScreenState extends State<AddressDetailsScreen> {
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8),
-              borderSide: const BorderSide(color: AppColors.hdbBlue, width: 2),
+              borderSide: const BorderSide(color: AppColors.appButtonColor, width: 2),
             ),
           ),
         ),
@@ -191,4 +200,3 @@ class _AddressDetailsScreenState extends State<AddressDetailsScreen> {
     );
   }
 }
-
