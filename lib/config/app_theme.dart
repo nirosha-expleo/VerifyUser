@@ -19,11 +19,17 @@ class AppTheme {
         foregroundColor: AppColors.whiteAppColor,
         elevation: 0,
         centerTitle: true,
+        iconTheme: const IconThemeData(
+          color: AppColors.whiteAppColor,
+        ),
         titleTextStyle: GoogleFonts.roboto(
           fontSize: 18,
           fontWeight: FontWeight.w700,
           color: AppColors.whiteAppColor,
         ),
+      ),
+      iconTheme: const IconThemeData(
+        color: AppColors.appTitleBlack,
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(

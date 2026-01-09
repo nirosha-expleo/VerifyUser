@@ -27,7 +27,7 @@ class _EmailVerificationSentScreenState extends State<EmailVerificationSentScree
   void initState() {
     super.initState();
     // Show loader after 3 seconds on the same screen
-    Future.delayed(const Duration(seconds: 3), () {
+    Future.delayed(const Duration(seconds: 1), () {
       if (mounted) {
         setState(() {
           _showLoader = true;
@@ -68,6 +68,7 @@ class _EmailVerificationSentScreenState extends State<EmailVerificationSentScree
       appBar: AppBar(
         backgroundColor: AppColors.whiteAppColor,
         elevation: 0,
+        automaticallyImplyLeading: true,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: AppColors.appTitleBlack),
           onPressed: () => NavigationHelper.smartPop(context),
