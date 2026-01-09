@@ -16,6 +16,10 @@ import 'package:verifyuser/screens/pan_verification_screen.dart';
 import 'package:verifyuser/screens/aadhaar_verification_screen.dart';
 import 'package:verifyuser/screens/digilocker_verification_screen.dart';
 import 'package:verifyuser/screens/verification_flow_screen.dart';
+import 'package:verifyuser/screens/processing_loader_screen.dart';
+import 'package:verifyuser/screens/loan_offer_screen.dart';
+import 'package:verifyuser/screens/offer_accepted_screen.dart';
+import 'package:verifyuser/screens/offer_rejected_screen.dart';
 import 'package:verifyuser/screens/screen1.dart';
 import 'package:verifyuser/screens/screen2.dart';
 import 'package:verifyuser/screens/screen3.dart';
@@ -63,6 +67,22 @@ class AppRouter {
       GoRoute(
         path: '/email-verified',
         builder: (context, state) => const EmailVerifiedScreen(),
+      ),
+      GoRoute(
+        path: '/processing-loader',
+        builder: (context, state) => const ProcessingLoaderScreen(),
+      ),
+      GoRoute(
+        path: '/offer-screen',
+        builder: (context, state) => const LoanOfferScreen(),
+      ),
+      GoRoute(
+        path: '/offer-accepted',
+        builder: (context, state) => const OfferAcceptedScreen(),
+      ),
+      GoRoute(
+        path: '/offer-rejected',
+        builder: (context, state) => const OfferRejectedScreen(),
       ),
       GoRoute(
         path: '/loading',

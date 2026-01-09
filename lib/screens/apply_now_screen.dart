@@ -88,58 +88,58 @@ class _ApplyNowScreenState extends State<ApplyNowScreen> {
             padding: const EdgeInsets.all(24),
             child: Form(
               key: _formKey,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
                   const AppLogo(),
-                  const SizedBox(height: 32),
-                  Text(
-                    'Apply Now',
-                    style: Theme.of(context).textTheme.displaySmall?.copyWith(
-                      fontWeight: FontWeight.bold,
-                      color: AppColors.appTitleBlack,
-                    ),
+                const SizedBox(height: 32),
+                Text(
+                  'Apply Now',
+                  style: Theme.of(context).textTheme.displaySmall?.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.appTitleBlack,
                   ),
-                  const SizedBox(height: 32),
+                ),
+                const SizedBox(height: 32),
                   // Mobile Number Field with +91
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      'Mobile Number*',
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        color: AppColors.textfieldColor,
-                        fontWeight: FontWeight.w500,
-                      ),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    'Mobile Number*',
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: AppColors.textfieldColor,
+                      fontWeight: FontWeight.w500,
                     ),
                   ),
-                  const SizedBox(height: 8),
+                ),
+                const SizedBox(height: 8),
                   TextFormField(
-                    controller: _mobileController,
-                    keyboardType: TextInputType.phone,
+                  controller: _mobileController,
+                  keyboardType: TextInputType.phone,
                     maxLength: 10,
                     inputFormatters: [
                       FilteringTextInputFormatter.digitsOnly,
                     ],
                     validator: _validateMobile,
-                    decoration: InputDecoration(
+                  decoration: InputDecoration(
                       prefixText: '+91 ',
                       prefixStyle: const TextStyle(
                         color: AppColors.textfieldColor,
                         fontSize: 16,
                         fontWeight: FontWeight.w500,
                       ),
-                      filled: true,
-                      fillColor: AppColors.inputFieldBackground,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8),
-                        borderSide: const BorderSide(color: AppColors.inputFieldBorder),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8),
-                        borderSide: const BorderSide(color: AppColors.inputFieldBorder),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8),
+                    filled: true,
+                    fillColor: AppColors.inputFieldBackground,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      borderSide: const BorderSide(color: AppColors.inputFieldBorder),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      borderSide: const BorderSide(color: AppColors.inputFieldBorder),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
                         borderSide: const BorderSide(color: AppColors.appButtonColor, width: 2),
                       ),
                       errorBorder: OutlineInputBorder(
@@ -149,59 +149,59 @@ class _ApplyNowScreenState extends State<ApplyNowScreen> {
                       focusedErrorBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8),
                         borderSide: const BorderSide(color: AppColors.redAccent, width: 2),
-                      ),
+                    ),
                       counterText: '',
                       hintText: 'Enter 10 digit mobile number',
-                    ),
                   ),
-                  const SizedBox(height: 16),
-                  // Terms & Conditions Checkbox
-                  Row(
-                    children: [
-                      Checkbox(
-                        value: _termsAccepted,
-                        onChanged: (value) {
-                          setState(() {
-                            _termsAccepted = value ?? false;
-                          });
-                        },
+                ),
+                const SizedBox(height: 16),
+                // Terms & Conditions Checkbox
+                Row(
+                  children: [
+                    Checkbox(
+                      value: _termsAccepted,
+                      onChanged: (value) {
+                        setState(() {
+                          _termsAccepted = value ?? false;
+                        });
+                      },
                         activeColor: AppColors.appButtonColor,
-                      ),
-                      Expanded(
-                        child: Text(
-                          'I have read and agree to all the Terms & Conditions',
-                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: AppColors.textfieldColor,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 32),
-                  // GET OTP Button
-                  SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      onPressed: _termsAccepted ? _handleGetOtp : null,
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.appButtonColor,
-                        foregroundColor: AppColors.whiteAppColor,
-                        padding: const EdgeInsets.symmetric(vertical: 16),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        disabledBackgroundColor: AppColors.disableAppColor,
-                      ),
-                      child: const Text(
-                        'GET OTP',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
+                    ),
+                    Expanded(
+                      child: Text(
+                        'I have read and agree to all the Terms & Conditions',
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          color: AppColors.textfieldColor,
                         ),
                       ),
                     ),
+                  ],
+                ),
+                const SizedBox(height: 32),
+                // GET OTP Button
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: _termsAccepted ? _handleGetOtp : null,
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColors.appButtonColor,
+                      foregroundColor: AppColors.whiteAppColor,
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      disabledBackgroundColor: AppColors.disableAppColor,
+                    ),
+                    child: const Text(
+                      'GET OTP',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ),
-                ],
+                ),
+              ],
               ),
             ),
           ),

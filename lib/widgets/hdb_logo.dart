@@ -14,15 +14,15 @@ class AppLogo extends StatelessWidget {
       children: [
         // Logo square
         Container(
-          width: 60,
-          height: 60,
+          width: 40,
+          height: 40,
           decoration: BoxDecoration(
             color: AppColors.appButtonColor,
             borderRadius: BorderRadius.circular(4),
           ),
           child: const Center(
             child: Text(
-              'EX',
+              '[  ]',//[ ]
               style: TextStyle(
                 color: AppColors.whiteAppColor,
                 fontSize: 20,

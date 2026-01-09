@@ -115,47 +115,47 @@ class _PanDobSelectionScreenState extends State<PanDobSelectionScreen> {
             child: Form(
               key: _formKey,
               child: SingleChildScrollView(
-                child: Column(
-                  children: [
+            child: Column(
+              children: [
                     const AppLogo(),
-                    const SizedBox(height: 32),
-                    Text(
-                      'PAN or Date of Birth',
-                      style: Theme.of(context).textTheme.displaySmall?.copyWith(
-                        fontWeight: FontWeight.bold,
-                        color: AppColors.appTitleBlack,
-                      ),
-                    ),
-                    const SizedBox(height: 32),
-                    // PAN Option
-                    _buildOption(
-                      context,
-                      value: 'pan',
-                      label: 'PAN',
-                      icon: Icons.badge,
-                    ),
-                    const SizedBox(height: 16),
-                    // Date of Birth Option
-                    _buildOption(
-                      context,
-                      value: 'dob',
-                      label: 'Date of Birth',
-                      icon: Icons.calendar_today,
-                    ),
+                const SizedBox(height: 32),
+                Text(
+                  'PAN or Date of Birth',
+                  style: Theme.of(context).textTheme.displaySmall?.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.appTitleBlack,
+                  ),
+                ),
+                const SizedBox(height: 32),
+                // PAN Option
+                _buildOption(
+                  context,
+                  value: 'pan',
+                  label: 'PAN',
+                  icon: Icons.badge,
+                ),
+                const SizedBox(height: 16),
+                // Date of Birth Option
+                _buildOption(
+                  context,
+                  value: 'dob',
+                  label: 'Date of Birth',
+                  icon: Icons.calendar_today,
+                ),
                     // Conditional PAN Input
                     if (_selectedOption == 'pan') ...[
-                      const SizedBox(height: 24),
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
+                  const SizedBox(height: 24),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
                           'PAN Number*',
-                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: AppColors.textfieldColor,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        color: AppColors.textfieldColor,
+                        fontWeight: FontWeight.w500,
                       ),
-                      const SizedBox(height: 8),
+                    ),
+                  ),
+                  const SizedBox(height: 8),
                       TextFormField(
                         controller: _panController,
                         textCapitalization: TextCapitalization.characters,
@@ -164,20 +164,20 @@ class _PanDobSelectionScreenState extends State<PanDobSelectionScreen> {
                           FilteringTextInputFormatter.allow(RegExp(r'[A-Z0-9]')),
                         ],
                         validator: _validatePAN,
-                        decoration: InputDecoration(
+                    decoration: InputDecoration(
                           hintText: 'Enter PAN (e.g., ABCDE1234F)',
-                          filled: true,
-                          fillColor: AppColors.inputFieldBackground,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(8),
-                            borderSide: const BorderSide(color: AppColors.inputFieldBorder),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(8),
-                            borderSide: const BorderSide(color: AppColors.inputFieldBorder),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(8),
+                      filled: true,
+                      fillColor: AppColors.inputFieldBackground,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8),
+                        borderSide: const BorderSide(color: AppColors.inputFieldBorder),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8),
+                        borderSide: const BorderSide(color: AppColors.inputFieldBorder),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8),
                             borderSide: const BorderSide(color: AppColors.appButtonColor, width: 2),
                           ),
                           errorBorder: OutlineInputBorder(
@@ -187,8 +187,8 @@ class _PanDobSelectionScreenState extends State<PanDobSelectionScreen> {
                           focusedErrorBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(8),
                             borderSide: const BorderSide(color: AppColors.redAccent, width: 2),
-                          ),
-                        ),
+                      ),
+                    ),
                       ),
                     ],
                     // Conditional DOB Input
@@ -233,55 +233,55 @@ class _PanDobSelectionScreenState extends State<PanDobSelectionScreen> {
                           }
                           return null;
                         },
-                      ),
-                      const SizedBox(height: 16),
-                      // Data Consent Checkbox
-                      Row(
-                        children: [
-                          Checkbox(
-                            value: _dataConsent,
-                            onChanged: (value) {
-                              setState(() {
-                                _dataConsent = value ?? false;
-                              });
-                            },
+                  ),
+                  const SizedBox(height: 16),
+                  // Data Consent Checkbox
+                  Row(
+                    children: [
+                      Checkbox(
+                        value: _dataConsent,
+                        onChanged: (value) {
+                          setState(() {
+                            _dataConsent = value ?? false;
+                          });
+                        },
                             activeColor: AppColors.appButtonColor,
+                      ),
+                      Expanded(
+                        child: Text(
+                          'Willing to use the data for processing your loan application',
+                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                            color: AppColors.textfieldColor,
                           ),
-                          Expanded(
-                            child: Text(
-                              'Willing to use the data for processing your loan application',
-                              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                color: AppColors.textfieldColor,
-                              ),
-                            ),
-                          ),
-                        ],
+                        ),
                       ),
                     ],
-                    const SizedBox(height: 32),
-                    // Submit Button
-                    SizedBox(
-                      width: double.infinity,
-                      child: ElevatedButton(
+                  ),
+                ],
+                const SizedBox(height: 32),
+                // Submit Button
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
                         onPressed: _handleSubmit,
-                        style: ElevatedButton.styleFrom(
+                    style: ElevatedButton.styleFrom(
                           backgroundColor: AppColors.appButtonColor,
-                          foregroundColor: AppColors.whiteAppColor,
-                          padding: const EdgeInsets.symmetric(vertical: 16),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                        ),
-                        child: const Text(
-                          'Submit',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
+                      foregroundColor: AppColors.whiteAppColor,
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
                       ),
                     ),
-                  ],
+                    child: const Text(
+                      'Submit',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
                 ),
               ),
             ),

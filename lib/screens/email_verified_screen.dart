@@ -6,9 +6,25 @@ import 'package:verifyuser/utility/navigation_helper.dart';
 import 'package:intl/intl.dart';
 
 /// Screen 8: Email Verified Successfully
-/// Features: Date, breadcrumbs, success message with green checkmark
-class EmailVerifiedScreen extends StatelessWidget {
+/// Features: Date, breadcrumbs, success message with green checkmark, auto-redirect to loader
+class EmailVerifiedScreen extends StatefulWidget {
   const EmailVerifiedScreen({super.key});
+
+  @override
+  State<EmailVerifiedScreen> createState() => _EmailVerifiedScreenState();
+}
+
+class _EmailVerifiedScreenState extends State<EmailVerifiedScreen> {
+  @override
+  void initState() {
+    super.initState();
+    // Auto-redirect to processing loader after 3 seconds
+    Future.delayed(const Duration(seconds: 3), () {
+      if (mounted) {
+        context.go('/processing-loader');
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -105,6 +121,28 @@ class EmailVerifiedScreen extends StatelessWidget {
                   ),
                 ),
                 const Spacer(),
+                // Continue Button
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () => context.go('/processing-loader'),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.appButtonColor,
+                      foregroundColor: AppColors.whiteAppColor,
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
+                    child: const Text(
+                      'Continue',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
               ],
             ),
           ),

@@ -34,6 +34,9 @@ class NavigationHelper {
       '/verification-flow/digilocker': '/personal-details',
       '/offer': '/email-verified',
       '/loading': '/email-verified',
+      '/processing-loader': '/email-verified',
+      '/offer-screen': '/processing-loader',
+      '/offer-accepted': '/offer-screen',
     };
 
     // Handle dynamic routes
