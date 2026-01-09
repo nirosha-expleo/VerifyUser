@@ -229,7 +229,7 @@ class _OfferAcceptedScreenState extends State<OfferAcceptedScreen> {
                         borderRadius: BorderRadius.circular(8),
                         borderSide: const BorderSide(color: AppColors.appButtonColor, width: 2),
                       ),
-                      hint: const Text('Select Preferred Language'),
+                      hintText: 'Select Preferred Language',
                     ),
                     items: _languages.map((language) {
                       return DropdownMenuItem<String>(
